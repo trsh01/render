@@ -1,6 +1,6 @@
 import time
 import logging
-import requests, json , talib
+import requests, json 
 from datetime import datetime
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
