@@ -6,3 +6,4 @@ requests
 websocket-client
 mplfinance 
 flask
+gunicorn
