@@ -18,7 +18,7 @@ def index():
 def chart_data():
     # 1. Load data
     #df = pd.read_csv('data.csv', index_col=0, parse_dates=True)
-    df = yf.Ticker('AAPL').history(period='4mo')[['Open', 'High', 'Low', 'Close', 'Volume']]
+    df = yf.Ticker('BTC-USD').history(period='4mo')[['Open', 'High', 'Low', 'Close', 'Volume']]
     # 2. Create memory buffer
     #with open("coin.txt", "r") as archivo:
     #    coin=archivo.read()
