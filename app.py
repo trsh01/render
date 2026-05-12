@@ -3,7 +3,6 @@ import mplfinance as mpf
 import pandas as pd
 import yfinance as yf
 from flask import Flask, send_file, request
-from flask_frozen import Freezer
 import matplotlib
 matplotlib.use('Agg') # Necessary for non-GUI backend
 
