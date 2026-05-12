@@ -20,8 +20,8 @@ def chart_data():
     #df = pd.read_csv('data.csv', index_col=0, parse_dates=True)
     df = yf.Ticker('AAPL').history(period='4mo')[['Open', 'High', 'Low', 'Close', 'Volume']]
     # 2. Create memory buffer
-    with open("coin.txt", "r") as archivo:
-        coin=archivo.read()
+    #with open("coin.txt", "r") as archivo:
+    #    coin=archivo.read()
     RSI_PERIOD=14
     closes_array = df['Close'].to_numpy()
     df['rsi']=talib.RSI(closes_array,RSI_PERIOD) 
