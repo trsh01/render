@@ -8,3 +8,4 @@ mplfinance
 flask
 gunicorn
 yfinance
+TA-Lib
