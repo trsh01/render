@@ -18,10 +18,11 @@ def chart_data():
     # 1. Load data
     #df = pd.read_csv('data.csv', index_col=0, parse_dates=True)
     df = yf.Ticker('AAPL').history(period='4mo')[['Open', 'High', 'Low', 'Close', 'Volume']]
-    # 2. Create memory buffer
-    memory_file = io.BytesIO()
     with open("coin.txt", "r") as archivo:
         coin=archivo.read()
+    # 2. Create memory buffer
+    memory_file = io.BytesIO()
+    
     # 3. Plot to buffer
     mpf.plot(df, type='candle', savefig=dict(fname=memory_file, format="png"))
     #rsi_plot = mpf.make_addplot(df['rsi'], panel=2, color='blue', ylabel='RSI')
