@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//ES" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Cripto Graph</title>
+    <style>
+        @import url('https://googleapis.com');
+
+body {
+    font-family: 'Press Start 2P';
+    
+}
+    </style>
+    
+
+</head>
+<frameset cols="75%,25%" border="0" frameborder="0" framespacing="0">
+    
+    <frameset rows="75%,25%" border="0" frameborder="0" framespacing="0">
+        <frame src="/BTC-USD" name="contenido" id="graf">
+        <frame src="/indices/BTC-USD" name="indice">
+    </frameset>
+    <frame src="/menu" name="menu">
+    
+</frameset>
+<script>
+        setInterval(function() {
+            var iframe = document.getElementById('graf');
+            iframe.src = iframe.src;
+        }, 5000); // 5000 milisegundos = 5 segundos
+    </script>
+</html>
