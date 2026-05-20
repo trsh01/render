@@ -36,68 +36,6 @@ def generate_signal(df):
 def index():
     #return '<meta http-equiv="refresh" content="5"><img src="/cripto/BTC-USD" alt="Financial Chart" />'
     return render_template('index.html')
-@app.route('/<string:symbol>/', defaults={'months':'4mo'})
-@app.route('/<string:symbol>/<string:months>',)
-def grafico(symbol, months):
-
-    return render_template('grafico.html',symbol=symbol,months=months)
-@app.route('/cripto/<string:symbol>/', defaults={'months':'4mo'})
-@app.route('/cripto/<string:symbol>/<string:months>',)
-def chart_data(symbol, months):
-    #1. Load data
-    #df = pd.read_csv('data.csv', index_col=0, parse_dates=True)
-    if symbol=="SPY-USD":
-        symbol="SPY"
-    elif symbol=="QQQ-USD":
-       symbol="QQQ"
-    elif symbol=="MSFT-USD":
-        symbol="MSFT"
-    elif symbol=="PHAROS-USD":
-        symbol="PROS39682-USD"
-    elif symbol=="AMD-USD":
-       symbol="AMD" 
-    elif symbol=="MU-USD":
-       symbol="MU"
-    elif symbol=="GOOGL-USD":
-        symbol="GOOGL"
-    elif symbol=="TSLA-USD":
-        symbol="TSLA"
-    elif symbol=="AAPL-USD":
-        symbol="AAPL"
-    print(months)
-    print(symbol)
-    df = yf.Ticker(symbol).history(period=months)[['Open', 'High', 'Low', 'Close', 'Volume']]
-    
-    # 2. Create memory buffer
-    #with open("coin.txt", "r") as archivo:
-    #    coin=archivo.read()
-    RSI_PERIOD=14
-    closes_array = df['Close'].to_numpy()
-    df['rsi']=talib.RSI(closes_array,RSI_PERIOD) 
-    df['overbought'] = 70
-    df['oversold'] = 20
-    #df.ta.macd(close='close', fast=6, slow=12, signal=5, append=True)   
-    memory_file = io.BytesIO()
-    # 3. Plot to buffer
-    #mpf.plot(df, type='candle', savefig=dict(fname=memory_file, format="png"))
-    if not df.index.empty:
-        apds=[
-            mpf.make_addplot(df['rsi'], panel=2, color='blue', ylabel='RSI', ylim=(0, 100)),
-            mpf.make_addplot(df['oversold'],panel=2,color='g',ylim=(0, 100)),
-            mpf.make_addplot(df['overbought'],panel=2,color='r',ylim=(0, 100))
-            #mpf.make_addplot([70], panel=2, color='red', linestyle='dotted'),
-            #mpf.make_addplot([30], panel=2, color='green', linestyle='dotted')
-        ]
-        mpf.plot(df, type='candle', style='starsandstripes', volume=True, title=symbol+' CHART', mav=(20, 50), addplot=apds, panel_ratios=(4, 2, 2), savefig=dict(fname=memory_file, format="png"))
-    else:
-        return send_file('notfound.png', mimetype='image/png')
-            
-    # 4. Seek to start
-    memory_file.seek(0)
-    
-    # 5. Return as image
-    return send_file(memory_file, mimetype='image/png')
-
 @app.route('/menu',methods=['GET'])
 def menu():
     tickers=[]
@@ -164,6 +102,67 @@ def menu():
     
     return render_template('menu.html', mvc=MVC,tg=TG,mg=MG) 
 
+@app.route('/<string:symbol>/', defaults={'months':'4mo'})
+@app.route('/<string:symbol>/<string:months>',)
+def grafico(symbol, months):
+
+    return render_template('grafico.html',symbol=symbol,months=months)
+@app.route('/cripto/<string:symbol>/', defaults={'months':'4mo'})
+@app.route('/cripto/<string:symbol>/<string:months>',)
+def chart_data(symbol, months):
+    #1. Load data
+    #df = pd.read_csv('data.csv', index_col=0, parse_dates=True)
+    if symbol=="SPY-USD":
+        symbol="SPY"
+    elif symbol=="QQQ-USD":
+       symbol="QQQ"
+    elif symbol=="MSFT-USD":
+        symbol="MSFT"
+    elif symbol=="PHAROS-USD":
+        symbol="PROS39682-USD"
+    elif symbol=="AMD-USD":
+       symbol="AMD" 
+    elif symbol=="MU-USD":
+       symbol="MU"
+    elif symbol=="GOOGL-USD":
+        symbol="GOOGL"
+    elif symbol=="TSLA-USD":
+        symbol="TSLA"
+    elif symbol=="AAPL-USD":
+        symbol="AAPL"
+    print(months)
+    print(symbol)
+    df = yf.Ticker(symbol).history(period=months)[['Open', 'High', 'Low', 'Close', 'Volume']]
+    
+    # 2. Create memory buffer
+    #with open("coin.txt", "r") as archivo:
+    #    coin=archivo.read()
+    RSI_PERIOD=14
+    closes_array = df['Close'].to_numpy()
+    df['rsi']=talib.RSI(closes_array,RSI_PERIOD) 
+    df['overbought'] = 70
+    df['oversold'] = 20
+    #df.ta.macd(close='close', fast=6, slow=12, signal=5, append=True)   
+    memory_file = io.BytesIO()
+    # 3. Plot to buffer
+    #mpf.plot(df, type='candle', savefig=dict(fname=memory_file, format="png"))
+    if not df.index.empty:
+        apds=[
+            mpf.make_addplot(df['rsi'], panel=2, color='blue', ylabel='RSI', ylim=(0, 100)),
+            mpf.make_addplot(df['oversold'],panel=2,color='g',ylim=(0, 100)),
+            mpf.make_addplot(df['overbought'],panel=2,color='r',ylim=(0, 100))
+            #mpf.make_addplot([70], panel=2, color='red', linestyle='dotted'),
+            #mpf.make_addplot([30], panel=2, color='green', linestyle='dotted')
+        ]
+        mpf.plot(df, type='candle', style='starsandstripes', volume=True, title=symbol+' CHART', mav=(20, 50), addplot=apds, panel_ratios=(4, 2, 2), savefig=dict(fname=memory_file, format="png"))
+    else:
+        return send_file('notfound.png', mimetype='image/png')
+            
+    # 4. Seek to start
+    memory_file.seek(0)
+    
+    # 5. Return as image
+    return send_file(memory_file, mimetype='image/png')
 @app.route('/indices/<string:symbol>',methods=['GET'])
 def indices(symbol):
     if symbol=="SPY-USD":
