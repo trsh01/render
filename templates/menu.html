@@ -12,7 +12,7 @@
   {% for link in mvc %}
     <li>
     <!--<a href="/cripto/{{ link[0] }}" target="contenido">{{ link[0] }}</a>-->
-      <a href="javascript:void(0);" onclick="parent.contenido.location.href='{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
+      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
       <p style="text-align: end;margin-top: -5%;">{{ link[1] }}</p>
     </li>
   {% endfor %}
@@ -21,7 +21,7 @@
 <ul>
   {% for link in mg %}
     <li>
-      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
+      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
       <p style="text-align: end;margin-top: -5%;">{{ link[2] }}</p>
     </li>
   {% endfor %}

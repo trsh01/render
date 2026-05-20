@@ -102,8 +102,8 @@ def menu():
     
     return render_template('menu.html', mvc=MVC,tg=TG,mg=MG) 
 
-@app.route('/<string:symbol>/', defaults={'months':'4mo'})
-@app.route('/<string:symbol>/<string:months>',)
+@app.route('/grafico/<string:symbol>/', defaults={'months':'4mo'})
+@app.route('/grafico/<string:symbol>/<string:months>',)
 def grafico(symbol, months):
 
     return render_template('grafico.html',symbol=symbol,months=months)
