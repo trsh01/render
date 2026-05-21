@@ -48,16 +48,16 @@ def menu():
     json_r=json.loads(response.text)
     for coin in json_r:
         print(coin)
-        if "_" in coin['symbol'] : None
-        elif "-" in coin['symbol']: None
-        elif "BTCDOM" in coin['symbol']:None
-        elif "XAUUSD" in coin['symbol']:None
-        elif "XPT" in coin['symbol']:None
-        elif "LITE" in coin['symbol']:None
-        elif "TAUSD" in coin['symbol']:None
-        elif "SPORTFUN" in coin['symbol']:None
+        if "_" in coin : None
+        elif "-" in coin: None
+        elif "BTCDOM" in coin:None
+        elif "XAUUSD" in coin:None
+        elif "XPT" in coin:None
+        elif "LITE" in coin:None
+        elif "TAUSD" in coin:None
+        elif "SPORTFUN" in coin:None
         else:
-            if 'USDT' in coin['symbol']:
+            if 'USDT' in coin:
                 ticker=[coin['symbol'], float(coin['lastPrice']), float(coin['priceChangePercent']), float(coin['priceChange'])]
                 tickers.append(ticker)
 
