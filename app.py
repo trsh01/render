@@ -131,8 +131,7 @@ def chart_data(symbol, months):
         symbol="TSLA"
     elif symbol=="AAPL-USD":
         symbol="AAPL"
-    print(months)
-    print(symbol)
+   
     df = yf.Ticker(symbol).history(period=months)[['Open', 'High', 'Low', 'Close', 'Volume']]
     
     # 2. Create memory buffer
