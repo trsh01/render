@@ -48,7 +48,7 @@ def menu():
     json_r=json.loads(response.text)
     for coin in json_r:
         print(coin)
-        print(coin['1'])
+        print(coin[1])
         if "_" in coin : None
         elif "-" in coin: None
         elif "BTCDOM" in coin:None
