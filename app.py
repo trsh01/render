@@ -44,11 +44,9 @@ def menu():
     req="https://www.binance.com/fapi/v1/ticker/24hr"
     #req="https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?count=10&formatted=true&scrIds=ALL_CRYPTOCURRENCIES_US&sortField=&sortType=&start=0&useRecordsResponse=true&fields=ticker%2ClogoUrl%2Csymbol%2ClongName%2Csparkline%2CshortName%2CregularMarketPrice%2CregularMarketChange%2CregularMarketChangePercent%2CmarketCap%2CregularMarketVolume%2Cvolume24Hr%2CvolumeAllCurrencies%2CcirculatingSupply%2CfiftyTwoWeekChangePercent%2CfiftyTwoWeekRange&lang=en-US&region=US"
     response = requests.get(req)
-    
+    print(response.text)
     json_r=json.loads(response.text)
     for coin in json_r:
-        print(coin)
-        print(coin[1])
         if "_" in coin : None
         elif "-" in coin: None
         elif "BTCDOM" in coin:None
