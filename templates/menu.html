@@ -12,8 +12,8 @@
   {% for link in mvc %}
     <li>
     <!--<a href="/cripto/{{ link[0] }}" target="contenido">{{ link[0] }}</a>-->
-      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
-      <p style="text-align: end;margin-top: -5%;">{{ link[1] }}</p>
+      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link.symbol }}'; parent.indice.location.href='indices/{{ link.symbol }}';">{{ link.symbol }}</a>
+      <p style="text-align: end;margin-top: -5%;">{{ link.price }}</p>
     </li>
   {% endfor %}
 </ul>
@@ -21,20 +21,13 @@
 <ul>
   {% for link in mg %}
     <li>
-      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
-      <p style="text-align: end;margin-top: -5%;">{{ link[2] }}</p>
+      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link.symbol }}'; parent.indice.location.href='indices/{{ link.symbol }}';">{{ link.symbol }}</a>
+      <p style="text-align: end;margin-top: -5%;">{{ link.percentChange }}</p>
     </li>
   {% endfor %}
 </ul>
 <h2>MAS GANADORES (/s)</h2> <p style="text-align: end;margin-top: -5%;">PRECIO</p>
-<ul>
-  {% for link in tg %}
-    <li>
-      
-      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/cripto/{{ link[0] }}'; parent.indice.location.href='indices/{{ link[0] }}';">{{ link[0] }}</a>
-      <p style="text-align: end;margin-top: -5%;">{{ link[3] }}</p></li>
-  {% endfor %}
-</ul>
+
 
 </body>
 </html>

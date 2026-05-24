@@ -5,7 +5,16 @@ import yfinance as yf
 from flask import Flask, send_file, request, render_template
 import talib
 import matplotlib
+from bs4 import BeautifulSoup
+
 matplotlib.use('Agg') # Necessary for non-GUI backend
+
+class Coin:
+    def __init__(self, symbol, price, percentChange):                
+        self.symbol = symbol  
+        self.price = (float(price))
+        self.percentChange = (float(percentChange))
+        self.priceChange=(self.price*self.percentChange)-self.price
 
 app = Flask(__name__)
 #app = Freezer(__name__)
@@ -41,96 +50,44 @@ def menu():
     tickers=[]
     topGainers=[]
     mostGainers=[]
-    req="https://www.binance.com/fapi/v1/ticker/24hr"
+    #req="https://www.binance.com/fapi/v1/ticker/24hr"
     #req="https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?count=10&formatted=true&scrIds=ALL_CRYPTOCURRENCIES_US&sortField=&sortType=&start=0&useRecordsResponse=true&fields=ticker%2ClogoUrl%2Csymbol%2ClongName%2Csparkline%2CshortName%2CregularMarketPrice%2CregularMarketChange%2CregularMarketChangePercent%2CmarketCap%2CregularMarketVolume%2Cvolume24Hr%2CvolumeAllCurrencies%2CcirculatingSupply%2CfiftyTwoWeekChangePercent%2CfiftyTwoWeekRange&lang=en-US&region=US"
-    response = requests.get(req)
-    print(response.text)
-    json_r=json.loads(response.text)
-    for coin in json_r:
-        if "_" in coin : None
-        elif "-" in coin: None
-        elif "BTCDOM" in coin:None
-        elif "XAUUSD" in coin:None
-        elif "XPT" in coin:None
-        elif "LITE" in coin:None
-        elif "TAUSD" in coin:None
-        elif "SPORTFUN" in coin:None
-        else:
-            if 'USDT' in coin:
-                ticker=[coin['symbol'], float(coin['lastPrice']), float(coin['priceChangePercent']), float(coin['priceChange'])]
-                tickers.append(ticker)
+    req="https://finance.yahoo.com/markets/crypto/all/?start=0&count=100"
+    headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    }
+    response = requests.get(req, headers=headers)
 
-    tickers.sort(key=lambda item: item[1])
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        quotes = soup.find_all('tr', class_='row')
+    
+    for quote in quotes:
+        symbol=quote.find('span', class_='symbol').text
+        data=quote.find(attrs={"data-testid-cell": "intradayprice"}).text.split(" ")
+        price=data[2].replace(',', '')
+        percentChange=data[5][1:-1].strip('%')       
+        coin=Coin(symbol,float(price),float(percentChange))
+        tickers.append(coin)
+    #print(len(tickers))
+    tickers.sort(key=lambda item: item.price)
     MVC=tickers[-15:]
     MVC=MVC[::-1]
-    tickers.sort(key=lambda item: item[2])
+    tickers.sort(key=lambda item: item.percentChange)
     MG=tickers[-15:]
     MG=MG[::-1]
-    tickers.sort(key=lambda item: item[3])
-    TG=tickers[-15:]
-    TG=TG[::-1]
-    for item in MVC:
-        
-        if "-" in item[0]:
-            symbolIndex=item[0].find("USD")
-            item[0]=item[0][:symbolIndex-1]+'-'+item[0][-3:]
-        else:
-            symbolIndex=item[0].find("USD")
-            item[0]=item[0][:symbolIndex]+'-'+item[0][-4:-1]
-        
-    for item in MG:
-        
-        if "-" in item[0]:
-            symbolIndex=item[0].find("USD")
-            item[0]=item[0][:symbolIndex-1]+'-'+item[0][-3:]
-        else:
-            symbolIndex=item[0].find("USD")
-            item[0]=item[0][:symbolIndex]+'-'+item[0][-4:-1]
-        
-    for item in TG:
-        
-        if "-" in item[0]:
-            symbolIndex=item[0].find("USD")
-            item[0]=item[0][:symbolIndex-1]+'-'+item[0][-3:]
-        else:
-            symbolIndex=item[0].find("USD")
-            item[0]=item[0][:symbolIndex]+'-'+item[0][-4:-1]
-        
-    #for item in TG:
-    #    symbolIndex=item[0].find("USDT")
-    #    item[0]=item[0][:symbolIndex]+'-'+item[0][-4:-1]
     
-    return render_template('menu.html', mvc=MVC,tg=TG,mg=MG) 
+    return render_template('menu.html', mvc=MVC, mg=MG) 
 
 @app.route('/grafico/<string:symbol>/', defaults={'months':'4mo'})
 @app.route('/grafico/<string:symbol>/<string:months>',)
 def grafico(symbol, months):
-
     return render_template('grafico.html',symbol=symbol,months=months)
 @app.route('/cripto/<string:symbol>/', defaults={'months':'4mo'})
 @app.route('/cripto/<string:symbol>/<string:months>',)
 def chart_data(symbol, months):
     #1. Load data
     #df = pd.read_csv('data.csv', index_col=0, parse_dates=True)
-    if symbol=="SPY-USD":
-        symbol="SPY"
-    elif symbol=="QQQ-USD":
-       symbol="QQQ"
-    elif symbol=="MSFT-USD":
-        symbol="MSFT"
-    elif symbol=="PHAROS-USD":
-        symbol="PROS39682-USD"
-    elif symbol=="AMD-USD":
-       symbol="AMD" 
-    elif symbol=="MU-USD":
-       symbol="MU"
-    elif symbol=="GOOGL-USD":
-        symbol="GOOGL"
-    elif symbol=="TSLA-USD":
-        symbol="TSLA"
-    elif symbol=="AAPL-USD":
-        symbol="AAPL"
-   
     df = yf.Ticker(symbol).history(period=months)[['Open', 'High', 'Low', 'Close', 'Volume']]
     
     # 2. Create memory buffer
