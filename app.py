@@ -70,15 +70,14 @@ def menu():
         coin=Coin(symbol,float(price),float(percentChange))
         tickers.append(coin)
     #print(len(tickers))
-    tickers.sort(key=lambda item: item.price)
-    MVC=tickers[-15:]
-    MVC=MVC[::-1]
+    #tickers.sort(key=lambda item: item.price)
+    MVC=tickers[:15]
+    #MVC=MVC[::-1]
     tickers.sort(key=lambda item: item.percentChange)
     MG=tickers[-15:]
     MG=MG[::-1]
     
     return render_template('menu.html', mvc=MVC, mg=MG) 
-
 @app.route('/grafico/<string:symbol>/', defaults={'months':'4mo'})
 @app.route('/grafico/<string:symbol>/<string:months>',)
 def grafico(symbol, months):
@@ -158,6 +157,9 @@ def indices(symbol):
         rsiSignal="Comprar"
         rsiColor="green"  
     return render_template('indices.html',signal=signal,rsi=rsi,rsiSignal=rsiSignal,rsiColor=rsiColor, maColor=maColor, symbol=symbol)
+@app.route('/title', methods=['GET'])
+def title():
+    return render_template('title.html')
 #if __name__ == '__main__':
    #app.run(host='0.0.0.0', port=5000) # '0.0.0.0' expone la app
 #   app.freeze()
