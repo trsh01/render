@@ -21,9 +21,7 @@ li:nth-child(even) a {
 
 body {  
     font-family: 'Press Start 2P';
-    background-image: url('fondo.png'); 
-    background-attachment: fixed;
-    background-position: center;
+    background-image: url('fondo.png');
 }
 
 [data-status="Hold"] {
@@ -43,4 +41,11 @@ button {
   color:goldenrod;
   background-color: #17187e;
   padding-right: 3%;
+}
+
+#title{
+  font-size:xx-large;
+  text-align: center;
+  color:goldenrod;
+  background-color: #17187e;
 }
