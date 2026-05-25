@@ -44,6 +44,7 @@ def generate_signal(df):
 @app.route('/',methods=['GET'])
 def index():
     #return '<meta http-equiv="refresh" content="5"><img src="/cripto/BTC-USD" alt="Financial Chart" />'
+    
     return render_template('index.html')
 @app.route('/menu',methods=['GET'])
 def menu():
@@ -160,6 +161,9 @@ def indices(symbol):
 @app.route('/title', methods=['GET'])
 def title():
     return render_template('title.html')
+@app.route('/mobile',methods=['GET'])
+def mobil():
+    return render_template('mobile.html')
 #if __name__ == '__main__':
    #app.run(host='0.0.0.0', port=5000) # '0.0.0.0' expone la app
 #   app.freeze()
