@@ -1,11 +1,18 @@
 <html>
   <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <meta http-equiv="refresh" content="10">
+    <!--<meta http-equiv="refresh" content="10">-->
+    
     </head>
 <body>
     <div style="text-align: center;">
-        <img src="/cripto/{{symbol}}/{{months}}">
+        <img  id="img" style="object-fit:contain;" src="/cripto/{{symbol}}/{{months}}">
     </div>
+    <script>
+    let width=window.innerWidth
+    console.log(width)
+    image=document.getElementById('img');
+    image.style.width = width;
+    </script>
 </body>
 </html>
