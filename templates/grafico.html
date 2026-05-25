@@ -10,8 +10,10 @@
     </div>
     <script>
     let width=window.innerWidth
-    image=document.getElementById('img');
-    image.style.width = width;
+    if(width<900){
+        image=document.getElementById('img');
+        image.style.width = width;
+    }
     </script>
 </body>
 </html>
