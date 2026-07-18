@@ -1,4 +1,0 @@
-ns10.dnsexit.com
-ns11.dnsexit.com
-ns12.dnsexit.com
-ns13.dnsexit.com
