@@ -49,8 +49,3 @@ button {
   color:goldenrod;
   background-color: #17187e;
 }
-
-:disabled{
-  background-color: #242424;
-  color:whitesmoke;
-}

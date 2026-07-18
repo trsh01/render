@@ -1,0 +1,30 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    </head>
+    <body>
+        </div>
+          <p style="font-size: large;">RSI={{rsi}}<span id="rsi"> {{rsiSignal}}</span></p>
+        </div>
+        <div>
+          <p style="font-size: large;">Señal de Medios: <span id="MA">{{signal}} </span></p>
+        </div>
+        <div>
+          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/1mo';">1mo</button>
+          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/4mo';">4mo</button>
+          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/12mo';">12mo </button>
+          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/24mo';">24mo </button>
+        </div>
+        <script>
+          const div = document.getElementById("rsi");
+          const div2 = document.getElementById("MA");
+          div.style.color = '{{rsiColor}}';
+          div2.style.color = '{{maColor}}';
+        </script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//ES" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Graficos de criptomonedas y activos.">
+    <meta name="author" content="trsh01">
+    <meta property="og:image" content="/static/fondo.png">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>📊Cripto Graph</title>
+    <style>
+        @import url('https://googleapis.com');
+
+        body {
+            font-family: 'Press Start 2P';
+            }
+    </style>
+    <script>
+    let width=window.innerWidth
+    if (width<900){
+        window.location.href = "/mobile";
+    }
+    </script>
+
+</head>
+<frameset rows="5%,95%" border="0" frameborder="0" framespacing="0">
+    <frame src="/title" name="title"></frame>
+    <frameset cols="70%,25%" border="0" frameborder="0" framespacing="0">
+        <frameset rows="75%,25%" border="0" frameborder="0" framespacing="0">
+            <frame src="/grafico/BTC-USD" name="contenido" id="graf">
+            <frame src="/indices/BTC-USD" name="indice">
+        </frameset>
+        <frame src="/menu" name="menu">
+        
+    </frameset>
+</frameset>
+
+</html>

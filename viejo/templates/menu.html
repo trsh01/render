@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  </head>
+<body>
+
+<h2>MAS POPULARES</h2>  <p style="text-align: end;margin-top: -5%;">PRECIO</p>
+<ul>
+  {% for link in mvc %}
+    <li>
+    <!--<a href="/cripto/{{ link[0] }}" target="contenido">{{ link[0] }}</a>-->
+      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link.symbol }}'; parent.indice.location.href='indices/{{ link.symbol }}';">{{ link.symbol }}</a>
+      <p style="text-align: end;margin-top: -5%;">{{ link.price }}</p>
+    </li>
+  {% endfor %}
+</ul>
+<h2>MAS GANADORES (/24hs)</h2> <p style="text-align: end;margin-top: -5%;">%Change</p>
+<ul>
+  {% for link in mg %}
+    <li>
+      <a href="javascript:void(0);" onclick="parent.contenido.location.href='/grafico/{{ link.symbol }}'; parent.indice.location.href='indices/{{ link.symbol }}';">{{ link.symbol }}</a>
+      <p style="text-align: end;margin-top: -5%;">{{ link.percentChange }}%</p>
+    </li>
+  {% endfor %}
+</ul>
+</body>
+</html>

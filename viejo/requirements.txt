@@ -1,0 +1,11 @@
+python-binance
+pandas
+numpy
+python-dotenv
+requests
+websocket-client
+mplfinance 
+flask
+gunicorn
+yfinance
+TA-Lib

@@ -14,11 +14,35 @@
         <div>
           <p style="font-size: large;">Señal de Medios: <span id="MA">{{signal}} </span></p>
         </div>
-        <div>
-          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/1mo';">1mo</button>
-          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/4mo';">4mo</button>
-          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/12mo';">12mo </button>
-          <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/24mo';">24mo </button>
+        <div style="display: flex;">
+          <div style="max-width: 30%;">
+            <p style="color:white;background-color: rgba(0, 0, 0, 0.7);">Periodo</span>
+            <p style="color:white;background-color: rgba(0, 0, 0, 0.7);">Intervalo</span>
+          </div>
+          <div>
+          <div>          
+            <button {{disablePeriod2}} {{disablePeriod3}} {{disablePeriod4}} {{disablePeriod5}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/1h/{{interval}}'; parent.indice.location.pathname='/indices/{{symbol}}/1h/{{interval}}';">1h</button>
+            <button {{disablePeriod2}} {{disablePeriod3}} {{disablePeriod4}} {{disablePeriod5}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/1D/{{interval}}'; parent.indice.location.pathname='/indices/{{symbol}}/1D/{{interval}}';">1D</button>
+            <button {{disablePeriod2}} {{disablePeriod3}} {{disablePeriod4}} {{disablePeriod5}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/5D/{{interval}}'; parent.indice.location.pathname='/indices/{{symbol}}/5D/{{interval}}';">5D </button>
+            <button {{disablePeriod}} {{disablePeriod2}} {{disablePeriod3}} {{disablePeriod4}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/1mo/{{interval}}';parent.indice.location.pathname='/indices/{{symbol}}/1mo/{{interval}}';">1mo </button>
+            <button {{disablePeriod}} {{disablePeriod2}} {{disablePeriod3}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/3mo/{{interval}}';parent.indice.location.pathname='/indices/{{symbol}}/3mo/{{interval}}';">3mo</button>
+            <button {{disablePeriod}} {{disablePeriod3}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/6mo/{{interval}}';parent.indice.location.pathname='/indices/{{symbol}}/6mo/{{interval}}';">6mo</button>
+            <button {{disablePeriod}} {{disablePeriod3}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/12mo/{{interval}}';parent.indice.location.pathname='/indices/{{symbol}}/12mo/{{interval}}';">12mo </button>
+            <button {{disablePeriod}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/24mo/{{interval}}';parent.indice.location.pathname='/indices/{{symbol}}/24mo/{{interval}}';">24mo </button>
+          </div>
+        
+          <div>
+            
+            <button {{disableInterval}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/1m'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/1m';">1m</button>
+            <button {{disableInterval}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/15m'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/15m';">15m</button>
+            <button {{disableInterval}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/30m'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/30m';">30m</button>
+            <button {{disableInterval}} onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/1h'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/1h';">1h</button>
+            <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/1D'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/1D';">1D</button>
+            <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/5D'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/5D';">5D</button>
+            <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/1wk'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/1wk';">1wk</button>
+            <button onclick="parent.contenido.location.href='/grafico/{{symbol}}/{{period}}/1mo'; parent.indice.location.pathname='/indices/{{symbol}}/{{period}}/1mo';">1mo</button>
+          </div>
+          </div>
         </div>
         <script>
           const div = document.getElementById("rsi");
