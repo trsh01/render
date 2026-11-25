@@ -69,9 +69,10 @@ def menu():
     
     for quote in quotes:
         symbol=quote.find('span', class_='symbol').text
-        data=quote.find(attrs={"data-testid-cell": "intradayprice"}).text.split(" ")
+        data=quote.find(attrs={"data-testid-cell": "full_day_price"}).text.split(" ")
+        print(data)
         price=data[2].replace(',', '')
-        percentChange=data[5][1:-1].strip('%')       
+        percentChange=data[5][1:-1].strip('%').strip(',').replace(',', '')   
         coin=Coin(symbol,float(price),float(percentChange))
         tickers.append(coin)
     #print(len(tickers))
